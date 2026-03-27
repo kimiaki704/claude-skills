@@ -40,12 +40,12 @@ cp -r claude-skills/skills/task-decompose ~/.claude/skills/
 
 6 Step の壁打ちフロー:
 
-1. **タスク受け取り** — 分類（調査/実装/バグ/リファクタ）+ ショートカット判定
+1. **タスク受け取り** — 分類（調査/実装/バグ/リファクタ/設計・意思決定）+ ショートカット判定
 2. **背景の深掘り** — なぜ必要か、何に影響するか
 3. **ゴール具体化** — 成果物・完了条件・スコープ（質問は合計 2 回まで）
 4. **粒度チェック** — 分割判定 + INVEST 簡易版チェック
 5. **期日設定** — 根拠と中間確認ポイント
-6. **テンプレート出力** — そのまま `gh issue create` 可能な形式
+6. **テンプレート出力** — テキスト / md ファイル / `gh issue create` の 3 段階
 
 ## Compatibility
 
@@ -67,7 +67,9 @@ claude-skills/
 │   ├── deep-review/
 │   │   └── SKILL.md         # 7-phase meta-review workflow
 │   └── task-decompose/
-│       └── SKILL.md         # 6-step task decomposition
+│       ├── SKILL.md         # 6-step task decomposition
+│       └── references/
+│           └── template.md  # Issue template (Progressive Disclosure)
 ├── README.md
 ├── LICENSE                  # MIT
 └── CONTRIBUTING.md
