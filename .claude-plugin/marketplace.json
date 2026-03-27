@@ -10,7 +10,7 @@
   "plugins": [
     {
       "name": "claude-skills",
-      "source": ".",
+      "source": "./",
       "description": "Deep review (multi-perspective gap analysis) and task decomposition (structured issue creation) skills",
       "version": "1.0.0",
       "license": "MIT",
