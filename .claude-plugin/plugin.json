@@ -1,7 +1,7 @@
 {
   "name": "claude-skills",
-  "version": "1.0.0",
-  "description": "Deep review and task decomposition skills for AI-driven development",
+  "version": "1.1.0",
+  "description": "Deep review, task decomposition, and LT outline builder skills for AI-driven development",
   "author": {
     "name": "kimiaki704",
     "url": "https://github.com/kimiaki704"
@@ -11,8 +11,10 @@
   "keywords": [
     "deep-review",
     "task-decompose",
+    "lt-outline-builder",
     "code-review",
     "issue-management",
+    "presentation",
     "best-practices"
   ]
 }
