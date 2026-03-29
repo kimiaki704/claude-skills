@@ -4,17 +4,17 @@
     "name": "kimiaki704"
   },
   "metadata": {
-    "description": "Skills for AI-driven development: deep review, task decomposition, and LT outline builder",
-    "version": "1.1.0"
+    "description": "Skills for AI-driven development: deep review, task decomposition, LT outline builder, and context briefing",
+    "version": "1.2.0"
   },
   "plugins": [
     {
       "name": "claude-skills",
       "source": "./",
-      "description": "Deep review (multi-perspective gap analysis), task decomposition (structured issue creation), and LT outline builder (interactive presentation outline creation) skills",
-      "version": "1.1.0",
+      "description": "Deep review (multi-perspective gap analysis), task decomposition (structured issue creation), LT outline builder (interactive presentation outline creation), and context briefing (project-aware tech trend impact analysis) skills",
+      "version": "1.2.0",
       "license": "MIT",
-      "keywords": ["deep-review", "task-decompose", "lt-outline-builder", "code-review", "issue-management", "presentation"],
+      "keywords": ["deep-review", "task-decompose", "lt-outline-builder", "context-briefing", "code-review", "issue-management", "presentation", "tech-briefing", "impact-analysis"],
       "category": "productivity"
     }
   ]
