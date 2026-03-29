@@ -96,6 +96,8 @@ tags: [library]
 
 ## Tags の例
 
+複数タグを付ける場合: `tags: [architecture, library]`（YAML 配列形式）
+
 | Tag | 対象 |
 |-----|------|
 | `[architecture]` | アーキテクチャパターン（MVC, MVVM, Clean Arch 等） |
@@ -115,7 +117,7 @@ tags: [library]
 ---
 status: Accepted
 date: 2026-01-15
-tags: [architecture]
+tags: [architecture, library]
 ---
 
 # 0001: MVVM + Clean Architecture の採用
