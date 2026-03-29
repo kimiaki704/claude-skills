@@ -1,7 +1,7 @@
 {
   "name": "claude-skills",
-  "version": "1.2.0",
-  "description": "Deep review, task decomposition, LT outline builder, and context briefing skills for AI-driven development",
+  "version": "1.3.0",
+  "description": "Deep review, task decomposition, LT outline builder, context briefing, and ADR capture skills for AI-driven development",
   "author": {
     "name": "kimiaki704",
     "url": "https://github.com/kimiaki704"
@@ -13,11 +13,13 @@
     "task-decompose",
     "lt-outline-builder",
     "context-briefing",
+    "adr-capture",
     "code-review",
     "issue-management",
     "presentation",
     "best-practices",
     "tech-briefing",
-    "impact-analysis"
+    "impact-analysis",
+    "architecture-decision"
   ]
 }

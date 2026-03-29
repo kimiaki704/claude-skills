@@ -1,8 +1,8 @@
 # claude-skills
 
-AI 駆動開発のためのスキルプラグイン。ドキュメント・ワークフローの業界水準レビュー、タスクの構造化・issue 起票、LT・プレゼンの構成案を対話的に作成、そしてプロジェクトコンテキストと紐づけた技術動向のインパクト分析。
+AI 駆動開発のためのスキルプラグイン。ドキュメント・ワークフローの業界水準レビュー、タスクの構造化・issue 起票、LT・プレゼンの構成案を対話的に作成、プロジェクトコンテキストと紐づけた技術動向のインパクト分析、そして技術的意思決定を壁打ちしながら ADR として記録する。
 
-> **English**: Claude Code plugin providing four skills for AI-driven development: (1) **deep-review** — multi-perspective gap analysis against industry best practices, (2) **task-decompose** — structured task decomposition and GitHub issue creation, (3) **lt-outline-builder** — interactive wizard for creating LT/presentation outlines, and (4) **context-briefing** — project-aware tech trend briefing with impact analysis.
+> **English**: Claude Code plugin providing five skills for AI-driven development: (1) **deep-review** — multi-perspective gap analysis against industry best practices, (2) **task-decompose** — structured task decomposition and GitHub issue creation, (3) **lt-outline-builder** — interactive wizard for creating LT/presentation outlines, (4) **context-briefing** — project-aware tech trend briefing with impact analysis, and (5) **adr-capture** — conversational walkthrough for capturing Architecture Decision Records.
 
 ## Install
 
@@ -17,6 +17,7 @@ cp -r claude-skills/skills/deep-review ~/.claude/skills/
 cp -r claude-skills/skills/task-decompose ~/.claude/skills/
 cp -r claude-skills/skills/lt-outline-builder ~/.claude/skills/
 cp -r claude-skills/skills/context-briefing ~/.claude/skills/
+cp -r claude-skills/skills/adr-capture ~/.claude/skills/
 ```
 
 ## Skills
@@ -27,6 +28,7 @@ cp -r claude-skills/skills/context-briefing ~/.claude/skills/
 | **[task-decompose](skills/task-decompose/SKILL.md)** | 抽象的なタスクを壁打ちで構造化し、「なぜ・何を・いつまでに」が明確な issue として起票する。タスク分類・INVEST チェック・質問ループ制御を内蔵 | Opus（曖昧な入力）/ Sonnet（具体的な入力） |
 | **[lt-outline-builder](skills/lt-outline-builder/SKILL.md)** | LT・プレゼンの構成案を4段階の対話ウィザードで作成する。発表条件の把握→コアメッセージ抽出→フレームワーク自動選択→スライド案出力まで一気通貫 | Sonnet |
 | **[context-briefing](skills/context-briefing/SKILL.md)** | プロジェクトコンテキスト（技術スタック・依存ライブラリ）を読み込み、指定した期間×ジャンルの技術動向をインパクト分析付きで返す定点観測スキル。「うちに関係ある変化は何か」を答える | Quick: Sonnet / Full: Opus |
+| **[adr-capture](skills/adr-capture/SKILL.md)** | 技術的な意思決定を壁打ちで引き出し、ADR（Architecture Decision Record）として記録する。決定前の相談・決定後の記録・過去の判断の掘り起こしに対応。ADR カタログ管理・Revisit Trigger 評価も内蔵 | Opus（壁打ち）/ Sonnet（整形・カタログ管理） |
 
 ### deep-review
 
@@ -50,6 +52,15 @@ cp -r claude-skills/skills/context-briefing ~/.claude/skills/
 4. **粒度チェック** — 分割判定 + INVEST 簡易版チェック
 5. **期日設定** — 根拠と中間確認ポイント
 6. **テンプレート出力** — テキスト / md ファイル / `gh issue create` の 3 段階
+
+### adr-capture
+
+4 Step の壁打ちフロー:
+
+1. **入力受け取り** — パターン分類（決定前 / 決定後 / ショートカット / 掘り起こし / カタログ管理）
+2. **意思決定の引き出し** — 何を決めたか・根拠・代替案を最大 2 ラウンドで引き出す
+3. **ADR 生成** — フルテンプレート or 軽量テンプレートで Markdown 出力（Claude Code 環境では直接書き出し）
+4. **カタログ管理** — 一覧表示・関連 ADR リンク・Status 更新・Revisit Trigger 評価
 
 ### lt-outline-builder
 
@@ -99,11 +110,15 @@ claude-skills/
 │   │   └── references/
 │   │       ├── frameworks.md        # 8 presentation frameworks
 │   │       └── slide-guidelines.md  # Slide count & timing guidelines
-│   └── context-briefing/
-│       ├── SKILL.md         # 6-phase project-aware briefing workflow
+│   ├── context-briefing/
+│   │   ├── SKILL.md         # 6-phase project-aware briefing workflow
+│   │   └── references/
+│   │       ├── impact-framework.md      # Impact level definitions & evaluation axes
+│   │       └── genre-search-patterns.md # Search query patterns by genre
+│   └── adr-capture/
+│       ├── SKILL.md         # Conversational ADR generation workflow
 │       └── references/
-│           ├── impact-framework.md      # Impact level definitions & evaluation axes
-│           └── genre-search-patterns.md # Search query patterns by genre
+│           └── template.md  # ADR templates (full & lightweight) + tag catalog
 ├── README.md
 ├── LICENSE                  # MIT
 └── CONTRIBUTING.md
