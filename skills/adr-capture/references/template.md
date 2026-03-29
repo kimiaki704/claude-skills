@@ -5,11 +5,13 @@
 大きな判断（アーキテクチャ・フレームワーク選定等）に使う。必須セクション + オプションセクションをすべて含む。
 
 ```markdown
-# NNNN: <タイトル>
+---
+status: Accepted
+date: YYYY-MM-DD
+tags: [architecture]
+---
 
-- **Status**: Accepted
-- **Date**: YYYY-MM-DD
-- **Tags**: [architecture], [library], [ci-cd], [testing], [security], [process] 等
+# NNNN: <タイトル>
 
 ## Context
 
@@ -52,11 +54,13 @@
 小さな判断（ライブラリのバージョン固定、設定値の選択等）に使う。必須セクションのみ。
 
 ```markdown
-# NNNN: <タイトル>
+---
+status: Accepted
+date: YYYY-MM-DD
+tags: [library]
+---
 
-- **Status**: Accepted
-- **Date**: YYYY-MM-DD
-- **Tags**: [library], [config] 等
+# NNNN: <タイトル>
 
 ## Decision
 
@@ -108,11 +112,13 @@
 ## 記入例
 
 ```markdown
-# 0001: MVVM + Clean Architecture の採用
+---
+status: Accepted
+date: 2026-01-15
+tags: [architecture]
+---
 
-- **Status**: Accepted
-- **Date**: 2026-01-15
-- **Tags**: [architecture]
+# 0001: MVVM + Clean Architecture の採用
 
 ## Context
 
