@@ -1,8 +1,8 @@
 # claude-skills
 
-AI 駆動開発のためのスキルプラグイン。ドキュメント・ワークフローの業界水準レビュー、タスクの構造化・issue 起票、そして LT・プレゼンの構成案を対話的に作成する。
+AI 駆動開発のためのスキルプラグイン。ドキュメント・ワークフローの業界水準レビュー、タスクの構造化・issue 起票、LT・プレゼンの構成案を対話的に作成、そしてプロジェクトコンテキストと紐づけた技術動向のインパクト分析。
 
-> **English**: Claude Code plugin providing three skills for AI-driven development: (1) **deep-review** — multi-perspective gap analysis against industry best practices, (2) **task-decompose** — structured task decomposition and GitHub issue creation, and (3) **lt-outline-builder** — interactive wizard for creating LT/presentation outlines.
+> **English**: Claude Code plugin providing four skills for AI-driven development: (1) **deep-review** — multi-perspective gap analysis against industry best practices, (2) **task-decompose** — structured task decomposition and GitHub issue creation, (3) **lt-outline-builder** — interactive wizard for creating LT/presentation outlines, and (4) **context-briefing** — project-aware tech trend briefing with impact analysis.
 
 ## Install
 
@@ -16,6 +16,7 @@ git clone https://github.com/kimiaki704/claude-skills.git
 cp -r claude-skills/skills/deep-review ~/.claude/skills/
 cp -r claude-skills/skills/task-decompose ~/.claude/skills/
 cp -r claude-skills/skills/lt-outline-builder ~/.claude/skills/
+cp -r claude-skills/skills/context-briefing ~/.claude/skills/
 ```
 
 ## Skills
@@ -25,6 +26,7 @@ cp -r claude-skills/skills/lt-outline-builder ~/.claude/skills/
 | **[deep-review](skills/deep-review/SKILL.md)** | ドキュメント・ワークフロー・設定ファイルを業界ベストプラクティスと複数専門家視点で分析し、改善提案を優先度付きで提示する。Quick モード（Sonnet）と Full モード（Opus）を選択可能 | Quick: Sonnet / Full: Opus |
 | **[task-decompose](skills/task-decompose/SKILL.md)** | 抽象的なタスクを壁打ちで構造化し、「なぜ・何を・いつまでに」が明確な issue として起票する。タスク分類・INVEST チェック・質問ループ制御を内蔵 | Opus（曖昧な入力）/ Sonnet（具体的な入力） |
 | **[lt-outline-builder](skills/lt-outline-builder/SKILL.md)** | LT・プレゼンの構成案を4段階の対話ウィザードで作成する。発表条件の把握→コアメッセージ抽出→フレームワーク自動選択→スライド案出力まで一気通貫 | Sonnet |
+| **[context-briefing](skills/context-briefing/SKILL.md)** | プロジェクトコンテキスト（技術スタック・依存ライブラリ）を読み込み、指定した期間×ジャンルの技術動向をインパクト分析付きで返す定点観測スキル。「うちに関係ある変化は何か」を答える | Quick: Sonnet / Full: Opus |
 
 ### deep-review
 
@@ -58,6 +60,17 @@ cp -r claude-skills/skills/lt-outline-builder ~/.claude/skills/
 3. **フレームワーク選択と構成案生成** — PREP / 結起承転結 / SCR / TAPS 等8種から自動提案 + フィードバックループ
 4. **スライド案と時間配分の提示** — スライドタイトル・キーメッセージ・推奨ビジュアル・想定時間を一覧出力
 
+### context-briefing
+
+6 Phase の定点観測ワークフロー:
+
+1. **入力収集** — 期間 × ジャンルを確認。モード（Quick/Full）を推定・提案
+2. **プロジェクトコンテキスト取り込み** — AGENTS.md / Package.swift 等を読み込みサマリーを作成
+3. **情報収集** — WebSearch でジャンル別に 2〜3 回検索（英語 + 日本語）
+4. **インパクト分析** — 収集情報とプロジェクトコンテキストを突合。🔴/🟡/🟢/⚪ で影響度判定
+5. **ブリーフィング出力** — 「何が起きたか・うちへの影響・推奨アクション」の3点セット
+6. **task-decompose 連携** — 🔴/🟡 トピックの issue 化をワンクリックで引き継ぎ
+
 ## Compatibility
 
 | Tool | Support |
@@ -81,11 +94,16 @@ claude-skills/
 │   │   ├── SKILL.md         # 6-step task decomposition
 │   │   └── references/
 │   │       └── template.md  # Issue template (Progressive Disclosure)
-│   └── lt-outline-builder/
-│       ├── SKILL.md         # 4-stage interactive outline wizard
+│   ├── lt-outline-builder/
+│   │   ├── SKILL.md         # 4-stage interactive outline wizard
+│   │   └── references/
+│   │       ├── frameworks.md        # 8 presentation frameworks
+│   │       └── slide-guidelines.md  # Slide count & timing guidelines
+│   └── context-briefing/
+│       ├── SKILL.md         # 6-phase project-aware briefing workflow
 │       └── references/
-│           ├── frameworks.md        # 8 presentation frameworks
-│           └── slide-guidelines.md  # Slide count & timing guidelines
+│           ├── impact-framework.md      # Impact level definitions & evaluation axes
+│           └── genre-search-patterns.md # Search query patterns by genre
 ├── README.md
 ├── LICENSE                  # MIT
 └── CONTRIBUTING.md
