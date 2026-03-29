@@ -9,3 +9,7 @@ Thumbs.db
 
 # Tasks
 tasks/*
+
+# Worktrees（プロジェクト内作業ブランチ。git worktree で管理）
+.claude/worktrees/*
+!.claude/worktrees/.gitkeep
