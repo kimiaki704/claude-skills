@@ -1,8 +1,8 @@
 # claude-skills
 
-AI 駆動開発のためのスキルプラグイン。ドキュメント・ワークフローの業界水準レビュー、タスクの構造化・issue 起票、LT・プレゼンの構成案を対話的に作成、プロジェクトコンテキストと紐づけた技術動向のインパクト分析、そして技術的意思決定を壁打ちしながら ADR として記録する。
+AI 駆動開発のためのスキルプラグイン。ドキュメント・ワークフローの業界水準レビュー、タスクの構造化・issue 起票、LT・プレゼンの構成案を対話的に作成、プロジェクトコンテキストと紐づけた技術動向のインパクト分析、技術的意思決定を壁打ちしながら ADR として記録、そして実務の知見から外部発信（LT・ブログ・登壇）のネタを発掘・整形する。
 
-> **English**: Claude Code plugin providing five skills for AI-driven development: (1) **deep-review** — multi-perspective gap analysis against industry best practices, (2) **task-decompose** — structured task decomposition and GitHub issue creation, (3) **lt-outline-builder** — interactive wizard for creating LT/presentation outlines, (4) **context-briefing** — project-aware tech trend briefing with impact analysis, and (5) **adr-capture** — conversational walkthrough for capturing Architecture Decision Records.
+> **English**: Claude Code plugin providing six skills for AI-driven development: (1) **deep-review** — multi-perspective gap analysis against industry best practices, (2) **task-decompose** — structured task decomposition and GitHub issue creation, (3) **lt-outline-builder** — interactive wizard for creating LT/presentation outlines, (4) **context-briefing** — project-aware tech trend briefing with impact analysis, (5) **adr-capture** — conversational walkthrough for capturing Architecture Decision Records, and (6) **content-seed** — extract publishable content (LT, blog, X thread) from engineering decisions and daily work.
 
 ## Install
 
@@ -18,6 +18,7 @@ cp -r claude-skills/skills/task-decompose ~/.claude/skills/
 cp -r claude-skills/skills/lt-outline-builder ~/.claude/skills/
 cp -r claude-skills/skills/context-briefing ~/.claude/skills/
 cp -r claude-skills/skills/adr-capture ~/.claude/skills/
+cp -r claude-skills/skills/content-seed ~/.claude/skills/
 ```
 
 ## Skills
@@ -29,6 +30,7 @@ cp -r claude-skills/skills/adr-capture ~/.claude/skills/
 | **[lt-outline-builder](skills/lt-outline-builder/SKILL.md)** | LT・プレゼンの構成案を4段階の対話ウィザードで作成する。発表条件の把握→コアメッセージ抽出→フレームワーク自動選択→スライド案出力まで一気通貫 | Sonnet |
 | **[context-briefing](skills/context-briefing/SKILL.md)** | プロジェクトコンテキスト（技術スタック・依存ライブラリ）を読み込み、指定した期間×ジャンルの技術動向をインパクト分析付きで返す定点観測スキル。「うちに関係ある変化は何か」を答える | Quick: Sonnet / Full: Opus |
 | **[adr-capture](skills/adr-capture/SKILL.md)** | 技術的な意思決定を壁打ちで引き出し、ADR（Architecture Decision Record）として記録する。決定前の相談・決定後の記録・過去の判断の掘り起こしに対応。ADR カタログ管理・Revisit Trigger 評価も内蔵 | Opus（壁打ち）/ Sonnet（整形・カタログ管理） |
+| **[content-seed](skills/content-seed/SKILL.md)** | 実務の意思決定・知見から外部発信（LT・ブログ・X スレッド）のネタを発掘し、発信可能な形に再構成する。ADR カタログ・会話ログ・フリーテキストからネタを抽出し、発信価値をスコアリング。社内情報の抽象化支援・チャネル別の構成整形・ネタ帳管理も内蔵 | Opus（ネタ発掘）/ Sonnet（整形）|
 
 ### deep-review
 
@@ -115,10 +117,16 @@ claude-skills/
 │   │   └── references/
 │   │       ├── impact-framework.md      # Impact level definitions & evaluation axes
 │   │       └── genre-search-patterns.md # Search query patterns by genre
-│   └── adr-capture/
-│       ├── SKILL.md         # Conversational ADR generation workflow
+│   ├── adr-capture/
+│   │   ├── SKILL.md         # Conversational ADR generation workflow
+│   │   └── references/
+│   │       └── template.md  # ADR templates (full & lightweight) + tag catalog
+│   └── content-seed/
+│       ├── SKILL.md         # Content extraction & formatting workflow
 │       └── references/
-│           └── template.md  # ADR templates (full & lightweight) + tag catalog
+│           ├── scoring-criteria.md    # Scoring rubric for content value
+│           ├── channel-templates.md   # Templates per channel (LT/blog/X/etc.)
+│           └── abstraction-patterns.md # Internal info detection & anonymization patterns
 ├── README.md
 ├── LICENSE                  # MIT
 └── CONTRIBUTING.md

@@ -4,17 +4,17 @@
     "name": "kimiaki704"
   },
   "metadata": {
-    "description": "Skills for AI-driven development: deep review, task decomposition, LT outline builder, context briefing, and ADR capture",
-    "version": "1.3.0"
+    "description": "Skills for AI-driven development: deep review, task decomposition, LT outline builder, context briefing, ADR capture, and content seed",
+    "version": "1.4.0"
   },
   "plugins": [
     {
       "name": "claude-skills",
       "source": "./",
-      "description": "Deep review (multi-perspective gap analysis), task decomposition (structured issue creation), LT outline builder (interactive presentation outline creation), context briefing (project-aware tech trend impact analysis), and ADR capture (architecture decision record via conversational walkthrough) skills",
-      "version": "1.3.0",
+      "description": "Deep review (multi-perspective gap analysis), task decomposition (structured issue creation), LT outline builder (interactive presentation outline creation), context briefing (project-aware tech trend impact analysis), ADR capture (architecture decision record via conversational walkthrough), and content seed (extract publishable content from engineering decisions) skills",
+      "version": "1.4.0",
       "license": "MIT",
-      "keywords": ["deep-review", "task-decompose", "lt-outline-builder", "context-briefing", "adr-capture", "code-review", "issue-management", "presentation", "tech-briefing", "impact-analysis", "architecture-decision"],
+      "keywords": ["deep-review", "task-decompose", "lt-outline-builder", "context-briefing", "adr-capture", "content-seed", "code-review", "issue-management", "presentation", "tech-briefing", "impact-analysis", "architecture-decision", "technical-writing", "knowledge-sharing"],
       "category": "productivity"
     }
   ]
