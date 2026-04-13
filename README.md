@@ -1,8 +1,8 @@
 # claude-skills
 
-AI 駆動開発のためのスキルプラグイン。ドキュメント・ワークフローの業界水準レビュー、タスクの構造化・issue 起票、LT・プレゼンの構成案を対話的に作成、プロジェクトコンテキストと紐づけた技術動向のインパクト分析、技術的意思決定を壁打ちしながら ADR として記録、そして実務の知見から外部発信（LT・ブログ・登壇）のネタを発掘・整形する。
+AI 駆動開発のためのスキルプラグイン。ドキュメント・ワークフローの業界水準レビュー、タスクの構造化・issue 起票、LT・プレゼンの構成案を対話的に作成、プロジェクトコンテキストと紐づけた技術動向のインパクト分析、技術的意思決定を壁打ちしながら ADR として記録、実務の知見から外部発信（LT・ブログ・登壇）のネタを発掘・整形、そしてエビデンスベースの探索的調査を反復深掘りで満足するまで深める。
 
-> **English**: Claude Code plugin providing six skills for AI-driven development: (1) **deep-review** — multi-perspective gap analysis against industry best practices, (2) **task-decompose** — structured task decomposition and GitHub issue creation, (3) **lt-outline-builder** — interactive wizard for creating LT/presentation outlines, (4) **context-briefing** — project-aware tech trend briefing with impact analysis, (5) **adr-capture** — conversational walkthrough for capturing Architecture Decision Records, and (6) **content-seed** — extract publishable content (LT, blog, X thread) from engineering decisions and daily work.
+> **English**: Claude Code plugin providing seven skills for AI-driven development: (1) **deep-review** — multi-perspective gap analysis against industry best practices, (2) **task-decompose** — structured task decomposition and GitHub issue creation, (3) **lt-outline-builder** — interactive wizard for creating LT/presentation outlines, (4) **context-briefing** — project-aware tech trend briefing with impact analysis, (5) **adr-capture** — conversational walkthrough for capturing Architecture Decision Records, (6) **content-seed** — extract publishable content (LT, blog, X thread) from engineering decisions and daily work, and (7) **deep-research** — evidence-based exploratory research with iterative deepening and scenario analysis.
 
 ## Install
 
@@ -19,6 +19,7 @@ cp -r claude-skills/skills/lt-outline-builder ~/.claude/skills/
 cp -r claude-skills/skills/context-briefing ~/.claude/skills/
 cp -r claude-skills/skills/adr-capture ~/.claude/skills/
 cp -r claude-skills/skills/content-seed ~/.claude/skills/
+cp -r claude-skills/skills/deep-research ~/.claude/skills/
 ```
 
 ## Skills
@@ -31,6 +32,7 @@ cp -r claude-skills/skills/content-seed ~/.claude/skills/
 | **[context-briefing](skills/context-briefing/SKILL.md)** | プロジェクトコンテキスト（技術スタック・依存ライブラリ）を読み込み、指定した期間×ジャンルの技術動向をインパクト分析付きで返す定点観測スキル。「うちに関係ある変化は何か」を答える | Quick: Sonnet / Full: Opus |
 | **[adr-capture](skills/adr-capture/SKILL.md)** | 技術的な意思決定を壁打ちで引き出し、ADR（Architecture Decision Record）として記録する。決定前の相談・決定後の記録・過去の判断の掘り起こしに対応。ADR カタログ管理・Revisit Trigger 評価も内蔵 | Opus（壁打ち）/ Sonnet（整形・カタログ管理） |
 | **[content-seed](skills/content-seed/SKILL.md)** | 実務の意思決定・知見から外部発信（LT・ブログ・X スレッド）のネタを発掘し、発信可能な形に再構成する。ADR カタログ・会話ログ・フリーテキストからネタを抽出し、発信価値をスコアリング。社内情報の抽象化支援・チャネル別の構成整形・ネタ帳管理も内蔵 | Opus（ネタ発掘）/ Sonnet（整形）|
+| **[deep-research](skills/deep-research/SKILL.md)** | テーマを探索的に調査し、エビデンスレベル（E1-E4）付きのファインディングスを提示。ユーザーのフィードバックで反復深掘りし、推論レベル（P1-P4）付きの未来シナリオ分析にも対応。Haiku sub-agent でトークン効率を最適化 | Quick: Sonnet / Full: Opus |
 
 ### deep-review
 
@@ -84,6 +86,18 @@ cp -r claude-skills/skills/content-seed ~/.claude/skills/
 5. **ブリーフィング出力** — 「何が起きたか・うちへの影響・推奨アクション」の3点セット
 6. **task-decompose 連携** — 🔴/🟡 トピックの issue 化をワンクリックで引き継ぎ
 
+### deep-research
+
+7 Phase のエビデンスベース探索調査ワークフロー:
+
+1. **入力 & スコープ設定** — Topic モード（テーマ指定）/ Seed モード（外部調査結果を入力）を選択
+2. **初回調査 / シード解析** — WebSearch で調査、または外部調査結果のエビデンスレベルを評価
+3. **ファインディングス提示** — E1-E4 のエビデンスレベル付き + ギャップマップで弱点を可視化
+4. **深掘り方向の選択** — 根拠補強 / 代替探索 / 具体化 / 反証検証 / 因果深掘り / シナリオ分岐の 6 タイプ
+5. **深掘り調査** — 選択した方向で追加調査。Haiku sub-agent で並列処理（Full モード）
+6. **統合 & 再評価** — ファインディングスを統合、ギャップマップを更新 → Phase 4 にループ
+7. **最終アウトプット** — エビデンスレベル付きレポート + シナリオマップ（該当時）+ ソース一覧
+
 ## Compatibility
 
 | Tool | Support |
@@ -121,12 +135,19 @@ claude-skills/
 │   │   ├── SKILL.md         # Conversational ADR generation workflow
 │   │   └── references/
 │   │       └── template.md  # ADR templates (full & lightweight) + tag catalog
-│   └── content-seed/
-│       ├── SKILL.md         # Content extraction & formatting workflow
+│   ├── content-seed/
+│   │   ├── SKILL.md         # Content extraction & formatting workflow
+│   │   └── references/
+│   │       ├── scoring-criteria.md    # Scoring rubric for content value
+│   │       ├── channel-templates.md   # Templates per channel (LT/blog/X/etc.)
+│   │       └── abstraction-patterns.md # Internal info detection & anonymization patterns
+│   └── deep-research/
+│       ├── SKILL.md         # 7-phase evidence-based exploratory research
 │       └── references/
-│           ├── scoring-criteria.md    # Scoring rubric for content value
-│           ├── channel-templates.md   # Templates per channel (LT/blog/X/etc.)
-│           └── abstraction-patterns.md # Internal info detection & anonymization patterns
+│           ├── evidence-framework.md  # Evidence levels (E1-E4) & projection levels (P1-P4)
+│           ├── deepening-types.md     # 6 deepening types with search strategies
+│           ├── output-templates.md    # Output formats for each phase
+│           └── scenario-framework.md  # Scenario analysis methodology
 ├── README.md
 ├── LICENSE                  # MIT
 └── CONTRIBUTING.md
